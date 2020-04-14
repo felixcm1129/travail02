@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Inventaire"
         mc:Ignorable="d"
-        Title="Gestion de clients" Width="800" Height="500"
+        Title="Gestion de clients 2.0" Width="800" Height="500"
         MinHeight="600" MinWidth="640"
         DataContext="{Binding RelativeSource={RelativeSource self}}">
     <DockPanel>
