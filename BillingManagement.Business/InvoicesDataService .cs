@@ -5,10 +5,10 @@ using BillingManagement.Models;
 
 namespace BillingManagement.Business
 {
-    class InvoicesDataService : IDataService <Invoice>
+    public class InvoicesDataService : IDataService <Invoice>
     {
         List<Invoice> invoices;
-        List<Customer> _customers;
+        IEnumerable<Customer> _customers;
 
         public IEnumerable<Invoice> GetAll()
         {
@@ -18,8 +18,10 @@ namespace BillingManagement.Business
             }
         }
 
-        public InvoicesDataService()
+        public InvoicesDataService(IEnumerable<Customer> customers)
         {
+            invoices = new List<Invoice>();
+            _customers = customers;
             initValues();
         }
 

@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading;
 
 namespace BillingManagement.Models
 {
-    class Invoice : IDisposable, INotifyPropertyChanged
+    public class Invoice : INotifyPropertyChanged
     {
         //INotify-------------------------------------------------------------------------------------------------------------------------------------------------------------------
         public event PropertyChangedEventHandler PropertyChanged;
@@ -17,18 +18,28 @@ namespace BillingManagement.Models
         }
         //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+        public int InvoiceId { get; private set; }
 
-        private static List<bool> UsedCounter = new List<bool>();
-        private static object Lock = new object();
+        static int nextId;
 
         private double subtotal;
         private double fedtax;
         private double provtax;
         private double total;
 
-        private readonly DateTime CreationDateTime;
+        public DateTime CreationDateTime { get; private set; }
 
-        Customer Customer;
+        private Customer _customer;
+
+        public Customer Customer
+        {
+            get => _customer;
+            set
+            {
+                _customer = value;
+                OnPropertyChanged();
+            }
+        }
 
         //gestion prix--------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -44,86 +55,21 @@ namespace BillingManagement.Models
                 OnPropertyChanged(nameof(Total));
             } 
         }
-        public double FedTax 
-        { 
-            get => fedtax; 
-            set
-            {
-                fedtax = subtotal * 1.05;
-            }
-        }
-        public double ProvTax 
-        { 
-            get => provtax; 
-            set
-            {
-                provtax = subtotal * 1.09975;
-            }
-        }
-        public double Total 
-        { 
-            get => total; 
-            set
-            {
-                total = subtotal + fedtax + provtax;
-            }
-        }
+        public double FedTax => SubTotal * 0.05;
+        public double ProvTax => SubTotal * 0.09975;
+        public double Total => SubTotal + FedTax + ProvTax;
+
+        public string Info => $"{CreationDateTime} : {Total}";
 
 
-
-
-        //Constructeur--------------------------------------------------------------------------------------------------------------------------------------------------------------
-
+        //Constructeur----------------------------------------------------------------------------
         public Invoice(Customer customer)
         {
-            Customer = customer;
+            InvoiceId = Interlocked.Increment(ref nextId);
+
             CreationDateTime = DateTime.Now;
+            Customer = customer;
         }
 
-
-        //gestion du ID-------------------------------------------------------------------------------------------------------------------------------------------------------------
-        public int InvoiceID { get; private set; }
-
-        public Invoice()
-        {
-
-            lock (Lock)
-            {
-                int nextIndex = GetAvailableIndex();
-                if (nextIndex == -1)
-                {
-                    nextIndex = UsedCounter.Count;
-                    UsedCounter.Add(true);
-                }
-
-                InvoiceID = nextIndex;
-                CreationDateTime = DateTime.Now;
-            }
-        }
-
-        public void Dispose()
-        {
-            lock (Lock)
-            {
-                UsedCounter[InvoiceID] = false;
-            }
-        }
-
-
-        private int GetAvailableIndex()
-        {
-            for (int i = 0; i < UsedCounter.Count; i++)
-            {
-                if (UsedCounter[i] == false)
-                {
-                    return i;
-                }
-            }
-
-            // Nothing available.
-            return -1;
-        }
-
-        //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     }
 }

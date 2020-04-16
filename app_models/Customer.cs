@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BillingManagement.Models;
+using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -90,7 +91,9 @@ namespace app_models
             PicturePath = "images/user.png";
         }
 
-        public ObservableCollection<ContactInfo> ContactInfos { get; set; }
+        public ObservableCollection<ContactInfo> contactInfos = new ObservableCollection<ContactInfo>();
+
+        public ObservableCollection<Invoice> invoices = new ObservableCollection<Invoice>();
 
         public event PropertyChangedEventHandler PropertyChanged;
 

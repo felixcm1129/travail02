@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BillingManagement.UI.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -14,13 +15,11 @@ using System.Windows.Shapes;
 namespace BillingManagement.UI.Views
 {
     /// <summary>
-    /// Logique d'interaction pour CustomerView.xaml
+    /// Logique d'interaction pour InvoiceView.xaml
     /// </summary>
-    public partial class CustomerView : UserControl
+    public partial class InvoiceView : UserControl
     {
-        public CustomerView()
-        {
-            InitializeComponent();
-        }
+        
     }
 }
+
