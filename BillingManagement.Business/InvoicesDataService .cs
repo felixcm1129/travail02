@@ -5,18 +5,10 @@ using BillingManagement.Models;
 
 namespace BillingManagement.Business
 {
-    public class InvoicesDataService : IDataService <Invoice>
+    public class InvoicesDataService : IDataService<Invoice>
     {
         List<Invoice> invoices;
         IEnumerable<Customer> _customers;
-
-        public IEnumerable<Invoice> GetAll()
-        {
-            foreach (Invoice i in invoices)
-            {
-                yield return i;
-            }
-        }
 
         public InvoicesDataService(IEnumerable<Customer> customers)
         {
@@ -24,7 +16,6 @@ namespace BillingManagement.Business
             _customers = customers;
             initValues();
         }
-
         private void initValues()
         {
             Random rnd = new Random();
@@ -42,6 +33,15 @@ namespace BillingManagement.Business
                     invoices.Add(invoice);
                 }
             }
+        }
+
+        public IEnumerable<Invoice> GetAll()
+        {
+            foreach (var item in invoices)
+            {
+                yield return item;
+            }
+
         }
     }
 }

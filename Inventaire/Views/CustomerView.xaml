@@ -7,6 +7,88 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-            
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Row="0" Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <StackPanel Margin="6" Orientation="Horizontal" x:Name="spHeader">
+                    <TextBlock Text="Liste des clients" />
+                </StackPanel>
+                <ListView Grid.Row="1" ItemsSource="{Binding Customers}"
+                          SelectedItem="{Binding SelectedCustomer}"
+                          x:Name="lvCustomers">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Info}"/>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+            <Grid Grid.Column="1" Margin="6">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="{Binding ElementName=spHeader,Path=ActualHeight}"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" Margin="3">
+                    <TextBlock Text="Prénom :" Width="75"/>
+                    <TextBox MinWidth="125" Text="{Binding SelectedCustomer.Name}"/>
+                </StackPanel>
+                <StackPanel Grid.Row="1" Grid.Column="1" 
+                            Orientation="Horizontal" Margin="3">
+                    <TextBlock Text="Nom :" Width="75"/>
+                    <TextBox MinWidth="125" Text="{Binding SelectedCustomer.LastName}"/>
+                </StackPanel>
+                <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" 
+                            Orientation="Horizontal" Margin="3" >
+                    <TextBlock Text="Adresse :" Width="75"/>
+                    <TextBox MinWidth="250" Text="{Binding SelectedCustomer.Address}"/>
+                </StackPanel>
+                <StackPanel Grid.Row="3" Grid.Column="0"
+                            Orientation="Horizontal" Margin="3" >
+                    <TextBlock Text="Ville :" Width="75"/>
+                    <TextBox MinWidth="175" Text="{Binding SelectedCustomer.City}"/>
+                </StackPanel>
+                <StackPanel Grid.Row="3" Grid.Column="1" 
+                            Orientation="Horizontal" Margin="3">
+                    <TextBlock Text="Province :" Width="75"/>
+                    <TextBox MinWidth="50" Text="{Binding SelectedCustomer.Province}"/>
+                </StackPanel>
+                <StackPanel Grid.Row="4" Grid.Column="0" 
+                            Orientation="Horizontal" Margin="3">
+                    <TextBlock Text="Code postal :" Width="75"/>
+                    <TextBox MinWidth="125" Text="{Binding SelectedCustomer.PostalCode}"/>
+                </StackPanel>
+                <StackPanel Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"
+                            Orientation="Horizontal" Margin="3">
+                    <TextBlock Text="Contact :" Width="75"/>
+                    <TextBlock MinWidth="125" Text="{Binding  SelectedCustomer.ContactInfo}"/>
+
+
+                </StackPanel>
+                <StackPanel Grid.Row="6" Grid.Column="2" Margin="6">
+                    <Button Content="Supprimer client" Click="CustomerDelete_Click"/>
+                </StackPanel>
+                <Image Margin="6" Grid.Row="7"
+                       Source="{Binding SelectedCustomer.PicturePath}"
+                       Stretch="Uniform"/>
+            </Grid>
+        </Grid>
     </Grid>
 </UserControl>

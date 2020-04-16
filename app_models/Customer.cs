@@ -95,6 +95,26 @@ namespace app_models
 
         public ObservableCollection<Invoice> invoices = new ObservableCollection<Invoice>();
 
+        public ObservableCollection<ContactInfo> ContactInfos
+        {
+            get => contactInfos;
+            set
+            {
+                contactInfos = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public ObservableCollection<Invoice> Invoices
+        {
+            get => invoices;
+            set
+            {
+                invoices = value;
+                OnPropertyChanged();
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName]string propertyName = null)
