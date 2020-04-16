@@ -13,6 +13,8 @@ namespace BillingManagement.UI.ViewModels
         private ObservableCollection<Invoice> invoices;
         private Invoice selectedInvoice;
 
+        IEnumerable<Customer> customerData;
+
         public ObservableCollection<Invoice> Invoices
         {
             get => invoices;
@@ -23,10 +25,15 @@ namespace BillingManagement.UI.ViewModels
             }
         }
 
-        public InvoiceViewModel(IEnumerable<Customer> customerData)
+        public InvoiceViewModel()
         {
-            InvoicesDataService ids = new InvoicesDataService(customerData);
-            Invoices = new ObservableCollection<Invoice>(ids.GetAll().ToList());
+            InitValues();
+        }
+
+        private void InitValues()
+        {
+            /*InvoicesDataService ids = new InvoicesDataService(customerData);
+            Invoices = new ObservableCollection<Invoice>(ids.GetAll().ToList());*/
         }
 
         public Invoice SelectedInvoice

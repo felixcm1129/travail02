@@ -33,7 +33,7 @@ namespace BillingManagement.Models
 
         public Customer Customer
         {
-            get => _customer;
+            get { return _customer; }
             set
             {
                 _customer = value;
@@ -45,7 +45,7 @@ namespace BillingManagement.Models
 
         public double SubTotal
         {
-            get => subtotal;
+            get { return subtotal; }
             set
             {
                 subtotal = value;

@@ -19,7 +19,10 @@ namespace BillingManagement.UI.Views
     /// </summary>
     public partial class InvoiceView : UserControl
     {
-        
+        public InvoiceView()
+        {
+            InitializeComponent();
+        }
     }
 }
 
